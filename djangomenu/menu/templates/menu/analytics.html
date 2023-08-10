@@ -1,0 +1,12 @@
+{% extends "menu/base.html" %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'menu/style.css' %}">
+{% endblock %}
+{% block content %}
+  <h1>Hello,  {{name}}! Here some analytics:</h1>
+    <div>Current Profit is {{profit}}</div>
+
+    <div>Current Revenue is {{revenue}}</div>
+{% endblock %}

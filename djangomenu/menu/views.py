@@ -17,6 +17,28 @@ def home(request):
 
   return render(request, "menu/home.html", context)
 
+def analytics(request):
+
+  context = {"name": request.user, "profit": profitCalc(), "revenue": revenueCalc(),  "page_title": "Analytics"}
+
+  return render(request, "menu/analytics.html", context)
+
+def profitCalc():
+    return revenueCalc() - costCalc()
+
+def revenueCalc():
+    revenue = 0
+    for purchase in Purchase.objects.all():
+        revenue += purchase.menuItem.price
+    return revenue
+
+def costCalc():
+    cost = 0
+    for purchase in Purchase.objects.all():
+        for recipeRequirement in RecipeRequirement.objects.filter(menuItem=purchase.menuItem):
+            cost += recipeRequirement.ingredient.unit_price * recipeRequirement.quantity
+    return cost
+
 class MenuItemList(LoginRequiredMixin, ListView):
   model = MenuItem
   template_name = "menu/items_list.html"

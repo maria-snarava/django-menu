@@ -1,4 +1,8 @@
 {% extends './base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'menu/style.css' %}">
+{% endblock %}
 {% block content %}
 <h2>Menu</h2>
 <a href="{% url 'purchase_create' %}"><button class="btn">Add Purchase</button></a>

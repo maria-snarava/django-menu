@@ -80,4 +80,4 @@ class PurchaseList(LoginRequiredMixin, ListView):
 class PurchaseCreate(LoginRequiredMixin, CreateView):
     model = Purchase
     template_name = "menu/item_create_form.html"
-    fields = ["menuItem", "date", "time"]
+    fields = ["menuItem"]

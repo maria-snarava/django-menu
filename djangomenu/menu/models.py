@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 # An inventory of different Ingredients, their available quantity, and their prices per unit
 class Ingredient(models.Model):
@@ -47,7 +48,7 @@ class RecipeRequirement(models.Model):
 #A log of all Purchases made at the restaurant
 class Purchase(models.Model):
     menuItem = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(default=now)
     def __str__(self):
         return '{}'.format(self.menuItem)
 

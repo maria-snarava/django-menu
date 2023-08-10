@@ -1,0 +1,15 @@
+{% extends "menu/base.html" %}
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'menu/style.css' %}">
+{% endblock %}
+{% block content %}
+  <h1>Welcome to our Cafe,
+      {% if name != "Dog" %}
+        {{name}}
+      {% else %}
+        Guest! Please, <a href="{% url 'login' %}">log in</a> to see our menu.
+      {% endif %}
+  </h1>
+{% endblock %}

@@ -3,6 +3,7 @@ from .models import Ingredient, MenuItem, RecipeRequirement, Purchase
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 # What is currently in the restaurant’s inventory?
 # What purchases have been made?
@@ -28,10 +29,12 @@ class MenuItemCreate(LoginRequiredMixin, CreateView):
 class MenuItemUpdate(LoginRequiredMixin, UpdateView):
   model = MenuItem
   template_name = "menu/item_update_form.html"
+  success_url = reverse_lazy("menu_item_list")
   fields = ["name", "price"]
 
 class MenuItemDelete(LoginRequiredMixin, DeleteView):
   model = MenuItem
+  success_url = reverse_lazy("menu_item_list")
   template_name = "menu/item_delete_form.html"
 
 
@@ -48,10 +51,12 @@ class IngredientCreate(LoginRequiredMixin, CreateView):
 class IngredientUpdate(LoginRequiredMixin, UpdateView):
   model = Ingredient
   template_name = "menu/item_update_form.html"
+  success_url = reverse_lazy("ingredient_list")
   fields = ["name", "quantity", "unit", "unit_price"]
 
 class IngredientDelete(LoginRequiredMixin, DeleteView):
   model = Ingredient
+  success_url = reverse_lazy("ingredient_list")
   template_name = "menu/item_delete_form.html"
 
 
@@ -62,15 +67,18 @@ class RecipeRequirementList(LoginRequiredMixin, ListView):
 class RecipeRequirementCreate(LoginRequiredMixin, CreateView):
     model = RecipeRequirement
     template_name = "menu/item_create_form.html"
+    success_url = reverse_lazy("recipe_requirement_list")
     fields = ["menuItem", "ingredient", "quantity"]
 
 class RecipeRequirementUpdate(LoginRequiredMixin, UpdateView):
     model = RecipeRequirement
     template_name = "menu/item_update_form.html"
+    success_url = reverse_lazy("recipe_requirement_list")
     fields = ["menuItem", "ingredient", "quantity"]
 
 class RecipeRequirementDelete(LoginRequiredMixin, DeleteView):
     model = RecipeRequirement
+    success_url = reverse_lazy("recipe_requirement_list")
     template_name = "menu/item_delete_form.html"
 
 class PurchaseList(LoginRequiredMixin, ListView):

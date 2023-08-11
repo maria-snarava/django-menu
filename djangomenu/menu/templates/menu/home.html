@@ -6,10 +6,10 @@
 {% endblock %}
 {% block content %}
   <h1>Welcome to our Cafe,
-      {% if name != "Dog" %}
-        {{name}}
-      {% else %}
+      {% if name == "AnonymousUser" %}
         Guest! Please, <a href="{% url 'login' %}">log in</a> to see our menu.
+      {% else %}
+        {{name}}!
       {% endif %}
   </h1>
 {% endblock %}

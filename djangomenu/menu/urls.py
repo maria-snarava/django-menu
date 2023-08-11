@@ -21,8 +21,8 @@ urlpatterns = [
     path("purchase/list", views.PurchaseList.as_view(), name="purchase_list"),
     path("purchase/create", views.PurchaseCreate.as_view(), name="purchase_create"),
 
-    path("accounts/", include("django.contrib.auth.urls"), name="login"),
+    path("login/", include("django.contrib.auth.urls"), name="login"),
     path("analytics/", views.analytics, name="analytics"),
-    # path('logout/', views.logout_view, name="logout"),
-    # path("signup/", views.SignUp.as_view(), name="signup"),
+    path('logout/', views.logout_view, name="logout"),
+    path("signup/", views.SignUp.as_view(), name="signup"),
 ]

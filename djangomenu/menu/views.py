@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Ingredient, MenuItem, RecipeRequirement, Purchase
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 # What is currently in the restaurant’s inventory?
 # What purchases have been made?
@@ -17,6 +20,7 @@ def home(request):
 
   return render(request, "menu/home.html", context)
 
+@login_required
 def analytics(request):
 
   context = {"name": request.user, "profit": profitCalc(), "revenue": revenueCalc(),  "page_title": "Analytics"}
@@ -111,3 +115,12 @@ class PurchaseCreate(LoginRequiredMixin, CreateView):
     model = Purchase
     template_name = "menu/item_create_form.html"
     fields = ["menuItem"]
+
+def logout_view(request):
+  logout(request)
+  return redirect("homePage")
+
+class SignUp(CreateView):
+  form_class = UserCreationForm
+  success_url = reverse_lazy("login")
+  template_name = "registration/signup.html"
